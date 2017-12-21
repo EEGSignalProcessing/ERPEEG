@@ -33,12 +33,6 @@ Current Maintainers:
 * Sravya Atluri
 * Benjamin Schwartzmann
 
-REPOSITORY WORKFLOW
---------------
-
-We follow the GitHub workflow guidelines summarized by [Ben Sandofsky](https://sandofsky.com/blog/git-workflow.html). Please contact @BenSchwartzmann about significant changes you intend to make to local branches. 
-
-
 GETTING STARTED
 --------------
 
