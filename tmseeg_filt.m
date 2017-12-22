@@ -393,8 +393,7 @@ ord = VARS.IIR_FILTER_ORDER;
 
 %Apply Filter
 for ch=1:size(EEG.data,1)
-    size(EEG.data(ch,:))
-	tempA=filtfilt(xall1,yall2,double(EEG.data(ch,:)));
+	tempA=filtfilt(xall1,yall2,reshape(double(EEG.data(ch,:)),size(EEG.data,2),size(EEG.data,3))); %changed by Ben 
 	tempB=filtfilt(xs1,xs2,double(tempA)); % apply notch filter
 	EEG.data(ch,:)= double(tempB);
 end
