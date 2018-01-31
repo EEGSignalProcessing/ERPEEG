@@ -3,10 +3,12 @@
 %         Ben Schwartzmann
 %         2017
 
-% tmseeg_ica2() - runs ICA round 2 on input EEG dataset
+% erpeeg_ica2_remove() - loads dataset from ICA2 step, checks for previously
+% labelled components, and calls the tmseeg_multiple_topos() function for ICA2
+% component analysis
 % 
 % Inputs:  S        - parent GUI structure
-%          step_num - step number of tmseeg_rm_TMS_decay in workflow
+%          step_num - step number of tmseeg_ica2_remove in workflow
 
 % This program is free software; you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -18,27 +20,29 @@
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
 
-
-function [] = tmseeg_ica2(S, step_num)
+function [] = erpeeg_ica2_remove(S, step_num)
 
 %Check if previous steps were done
 if tmseeg_previous_step(step_num) 
     return 
-end
+end 
 
-global VARS
+global basepath
+global comptype
 
-%Data Load
+%Load Data
 [files, EEG] = tmseeg_load_step(step_num);
-VARS.ICA2_COMP_NUM = ceil(EEG.nbchan*VARS.ICA_COMP_PCT/100);
-    
-%Run ICA2
-h1 = msgbox('Running ICA2,now!');
-EEG = pop_runica( EEG, 'icatype' ,'fastica','g','tanh',...
-        'approach','symm','lasteig',VARS.ICA2_COMP_NUM);
-    
-tmseeg_step_check(files, EEG, S, step_num);
-close(h1);
+[~,name,~] = fileparts(files.name);
 
+%Check for existing ICA2 removal data
+if exist(fullfile(basepath,[name '_' num2str(step_num) '_ICA2comp.mat']),'file')
+    load(fullfile(basepath,[name '_' num2str(step_num) '_ICA2comp.mat'])); %#ok
+    comptype = ICA2comp;
+    EEG.comptype = comptype;
+else
+    comptype = zeros(1,size(EEG.icawinv,2));
 end
 
+erpeeg_multiples_topos(EEG,name, S, step_num);
+
+end
