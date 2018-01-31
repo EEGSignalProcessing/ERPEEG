@@ -12,7 +12,7 @@ if exist([basepath '/' name '_' num2str(step_num) ext],'file')
     
     switch choice
         case 'Yes'
-            tmseeg_reset_workflow(S,step_num,S.num_steps)
+            erpeeg_reset_workflow(S,step_num,S.num_steps)
             tmseeg_save_step(EEG,S,files,step_num)
     end
     
