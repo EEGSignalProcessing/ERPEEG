@@ -6,8 +6,7 @@ global basepath
 checkext = '';
 
 for i = 1:step_num - 1
-    checkext = strcat(checkext,['_' num2str(i)]); %modification by Ben
-    %    checkext = [checkext '_' num2str(i)]; 
+    checkext = strcat(checkext,['_' num2str(i)]); 
 end
 
 files   = dir(fullfile(basepath,['*' checkext '.set']));
