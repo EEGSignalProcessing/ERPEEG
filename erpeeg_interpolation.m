@@ -41,7 +41,13 @@ end
 
 EEG.channels_interpolated = find(badchan);
 EEG = eeg_checkset( EEG );
-EEG = pop_reref( EEG, []);
+
+re_ref = questdlg('Re-reference to average?');
+if strcmp(re_ref,'Yes')
+    EEG = pop_reref(EEG, []);
+    EEG = eeg_checkset( EEG );
+end
+
 
 save(fullfile(basepath,[basefile '_erpeeg_settings.mat']), 'VARS');
 tmseeg_step_check(files, EEG, S, step_num)
