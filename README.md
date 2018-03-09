@@ -8,8 +8,7 @@ GUI format with modularity.
 
 REQUIREMENTS
 --------------------
-ERPEEG was built on MATLAB v2013a, with use of EEGLAB v12.0.2.6b.  Both
-EEGLAB and MATLAB support backward compatibility with more recent releases.
+ERPEEG was built originally on MATLAB 2013a, with use of EEGLAB v12.0.2.6b. This updated version is re-packaged using MATLAB 2017b and EEGLAB v14.1.1b. This updated version requires MATLAB (2013a or later version) and EEGLAB v14.1.1b.
 
 * MATLAB  - http://www.mathworks.com/products/matlab/
 * EEGLAB  - http://sccn.ucsd.edu/eeglab/downloadtoolbox.php
@@ -41,4 +40,4 @@ Visit the [wiki page](https://github.com/EEGSignalProcessing/ERPEEG/wiki/Getting
 1) ERPEEG toolbox requires [EEGLAB](https://sccn.ucsd.edu/eeglab/downloadtoolbox.php) to be installed
 2) MATLAB is picky about [paths](http://www.mathworks.com/help/matlab/ref/path.html?s_tid=gn_loc_drop). After download, pay attention to how the paths are set as indicated by the tutorial and documentation. If you receive an error that a file is missing it is probably because either the dependencies are not installed or because the paths are not set correctly
 3) You'll also need to download [FastICA](http://www.cis.hut.fi/projects/ica/fastica/) and have it on your path for the ERPEEG toolbox to work as is
-4) Once you've downloaded everything and have your paths set, open MATLAB to the folder containing ERPEEG and simply doubleclick the .mlappinstall file (erpeeg2017.mlappinstall).
+4) Once you've downloaded everything and have your paths set, open MATLAB to the folder containing ERPEEG and simply doubleclick the .mlappinstall file (erpeeg_v2.0.mlappinstall).
