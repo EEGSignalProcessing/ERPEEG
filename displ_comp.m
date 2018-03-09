@@ -10,7 +10,7 @@
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
 
-function tmseeg_displ_comp(comptype,I)
+function displ_comp(comptype,I)
 i = comptype>0;
 if ~any(i)
     return

@@ -1,13 +1,11 @@
-% Author: Matthew Frehlich, Ye Mei, Luis Garcia Dominguez, Faranak Farzan
-%         2016
-%         Ben Schwartzmann
-%         2017
+% Author: Matthew Frehlich, Ye Mei, Luis Garcia Dominguez,Faranak Farzan
+% 2016
 
 % tmseeg_filt() - Interactive display for selection and parameterization
 % of th filtering process.  User selects between an FIR and IIR filtering
 % option.
 % 
-% Inputs:  A        - parent GUI structure
+% inputs:  A        - parent GUI structure
 %          step_num - step number of tmseeg_filt in workflow
 
 % Display window interface:
@@ -39,14 +37,7 @@
 % but WITHOUT ANY WARRANTY; without even the implied warranty of
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
-
-
-function tmseeg_filt(A, step_num)
-
-%Check if previous steps were done
-if tmseeg_previous_step(step_num) 
-    return 
-end
+function tmseeg_filt(A,step_num)
 
 global backcolor VARS
 
@@ -61,18 +52,18 @@ filt1_slider_low_iir=1; filt1_slider_high_iir=80;
 notch_center=60; notch_size=10;
 
 %-----------------------------GUI setup------------------------------------
-hfig = figure('Menubar','none',...
+hfig = figure('menubar','none',...
               'Toolbar','none',...
-              'Name','tmseeg_filt1',...
-              'Numbertitle','off',...
-              'Resize','off',...
-              'Color',backcolor,...
+              'name','tmseeg_filt1',...
+              'numbertitle','off',...
+              'resize','off',...
+              'color',backcolor,...
               'DockControls','off');
 
 Title_txt  = uicontrol(hfig,'Style','text',...
                     'String','Select Filter Type and Parameters',...
                     'Units','normalized',...,
-                    'Position',[0.3 0.9 0.4 0.05]); %#ok
+                    'Position',[0.3 0.9 0.4 0.05]);
                 
 %FIR Filter
 slider_pre = uicontrol('Parent', hfig,'Style','slider',...
@@ -83,7 +74,7 @@ slider_pre = uicontrol('Parent', hfig,'Style','slider',...
                     'Value',filt1_slider_low_fir,...
                     'Max',10,...
                     'Min',0,...                
-                    'Callback',@slider_callback1); %#ok
+                    'Callback',@slider_callback1);
 slider_pos = uicontrol('Parent', hfig,'Style','slider',...
                     'Units','normalized',...
                     'Position',[0.55 0.7 0.4 0.05],...
@@ -92,43 +83,44 @@ slider_pos = uicontrol('Parent', hfig,'Style','slider',...
                     'Value',filt1_slider_high_fir,...
                     'Max',90,...
                     'Min',50,... 
-                    'Callback',@slider_callback2); %#ok
+                    'Callback',@slider_callback2);
 text_pre  = uicontrol(hfig,'Style','text',...
                     'String',num2str(filt1_slider_low_fir),...
                     'Units','normalized',...,
                     'Tag','filter1_text1',...
                     'Position',[0.2 0.75 0.1 0.05],...
-                    'Callback',@text_callback1); %#ok
+                    'Callback',@text_callback1);
 text_pre_unit  = uicontrol(hfig,'Style','text',...
                     'String','Hz',...
                     'Units','normalized',...,
-                    'Position',[0.3 0.75 0.06 0.05]); %#ok
+                    'Position',[0.3 0.75 0.06 0.05]);
 text_pos  = uicontrol(hfig,'Style','text',...
                     'String',num2str(filt1_slider_high_fir),...
                     'Units','normalized',...
                     'Tag','filter1_text2',...
                     'Position',[0.7 0.75 0.1 0.05],...
-                    'Callback',@text_callback2); %#ok
+                    'Callback',@text_callback2);
 text_pos_unit  = uicontrol(hfig,'Style','text',...
                     'String','Hz',...
                     'Units','normalized',...
-                    'Position',[0.8 0.75 0.06 0.05]); %#ok                          
+                    'Position',[0.8 0.75 0.06 0.05]);                         
 FIR_button = uicontrol('Parent', hfig,'Style','pushbutton',...
                     'Units','normalized',...
                     'Position',[0.4 0.55 0.2 0.1],...
                     'String','FIR Filter',...
-                    'Callback',{@tmseeg_FIR_func,A,step_num}); %#ok     
+                    'Callback',{@tmseeg_FIR_func,A,step_num});      
 FIR_ord_txt = uicontrol('Parent', hfig,'Style','text',...
                     'Units','normalized',...
                     'Position',[0.65 0.55 0.2 0.05],...
-                    'String','FIR Filter Order:'); %#ok
+                    'String','FIR Filter Order:');
 FIR_filt_ord_button = uicontrol('Parent', hfig,'Style','pushbutton',...
                     'Units','normalized',...
                     'Position',[0.85 0.55 0.05 0.05],...
                     'String',num2str(VARS.FIR_FILTER_ORDER),...
                     'tag','fir_filt_ord',...
-                    'Callback',{@FIR_filt_ord}); %#ok
+                    'Callback',{@FIR_filt_ord});
                 
+
 % IIR Filter
 slider_pre_iir = uicontrol('Parent', hfig,'Style','slider',...
                     'Units','normalized',...
@@ -138,7 +130,7 @@ slider_pre_iir = uicontrol('Parent', hfig,'Style','slider',...
                     'Value',filt1_slider_low_iir,...
                     'Max',10,...
                     'Min',0,...                
-                    'Callback',@slider_callback1_iir); %#ok
+                    'Callback',@slider_callback1_iir);
 slider_pos_iir = uicontrol('Parent', hfig,'Style','slider',...
                     'Units','normalized',...
                     'Position',[0.55 0.35 0.4 0.05],...
@@ -147,27 +139,27 @@ slider_pos_iir = uicontrol('Parent', hfig,'Style','slider',...
                     'Value',filt1_slider_high_iir,...
                     'Max',90,...
                     'Min',45,... 
-                    'Callback',@slider_callback2_iir); %#ok
+                    'Callback',@slider_callback2_iir);
 text_pre_iir  = uicontrol(hfig,'Style','text',...
                     'String',num2str(filt1_slider_low_iir),...
                     'Units','normalized',...,
                     'Tag','filter1_text1_iir',...
                     'Position',[0.2 0.40 0.1 0.05],...
-                    'Callback',@text_callback1_iir); %#ok
+                    'Callback',@text_callback1_iir);
 text_pre_unit_iir  = uicontrol(hfig,'Style','text',...
                     'String','Hz',...
                     'Units','normalized',...,
-                    'Position',[0.3 0.40 0.06 0.05]); %#ok               
+                    'Position',[0.3 0.40 0.06 0.05]);                
 text_pos  = uicontrol(hfig,'Style','text',...
                     'String',num2str(filt1_slider_high_iir),...
                     'Units','normalized',...
                     'Tag','filter1_text2_iir',...
                     'Position',[0.7 0.40 0.1 0.05],...
-                    'Callback',@text_callback2_iir); %#ok
+                    'Callback',@text_callback2_iir);
 text_pos_unit_iir  = uicontrol(hfig,'Style','text',...
                     'String','Hz',...
                     'Units','normalized',...
-                    'Position',[0.8 0.40 0.06 0.05]); %#ok               
+                    'Position',[0.8 0.40 0.06 0.05]);                 
 slider_notch_center = uicontrol('Parent', hfig,'Style','slider',...
                     'Units','normalized',...
                     'Position',[0.05 0.2 0.4 0.05],...
@@ -176,7 +168,7 @@ slider_notch_center = uicontrol('Parent', hfig,'Style','slider',...
                     'Value',notch_center,... 
                     'Max',60,...
                     'Min',50,... 
-                    'Callback',@callback_slider_notch_center); %#ok
+                    'Callback',@callback_slider_notch_center);
 slider_notch_size = uicontrol('Parent', hfig,'Style','slider',...
                     'Units','normalized',...
                     'Position',[0.55 0.2 0.4 0.05],...
@@ -185,51 +177,52 @@ slider_notch_size = uicontrol('Parent', hfig,'Style','slider',...
                     'Value',notch_size,...
                     'Max',40,...
                     'Min',5,... 
-                    'Callback',@callback_slider_notch_size); %#ok
+                    'Callback',@callback_slider_notch_size);
 text_notch_center  = uicontrol(hfig,'Style','text',...
                     'String',num2str(notch_center),...
                     'Units','normalized',...,
                     'Tag','text_notch_center',...
                     'Position',[0.2 0.25 0.1 0.05],...
-                    'Callback',@callback_text_notch_center); %#ok
+                    'Callback',@callback_text_notch_center);
 text_unit_notch_center  = uicontrol(hfig,'Style','text',...
                     'String','Hz',...
                     'Units','normalized',...,
-                    'Position',[0.3 0.25 0.06 0.05]); %#ok 
+                    'Position',[0.3 0.25 0.06 0.05]);  
 text_f_notch_center  = uicontrol(hfig,'Style','text',...
                     'String','notch center:',...
                     'Units','normalized',...,
-                    'Position',[0.05 0.25 0.16 0.05]); %#ok
+                    'Position',[0.05 0.25 0.16 0.05]); 
 text_notch_size  = uicontrol(hfig,'Style','text',...
                     'String',num2str(notch_size),...
                     'Units','normalized',...,
                     'Tag','text_notch_size',...
                     'Position',[0.7 0.25 0.1 0.05],...
-                    'Callback',@callback_text_notch_size); %#ok
+                    'Callback',@callback_text_notch_size);
 text_unit_notch_size  = uicontrol(hfig,'Style','text',...
                     'String','Hz',...
                     'Units','normalized',...,
-                    'Position',[0.8 0.25 0.06 0.05]); %#ok 
+                    'Position',[0.8 0.25 0.06 0.05]); 
 text_f_notch_size  = uicontrol(hfig,'Style','text',...
                     'String','notch size:',...
                     'Units','normalized',...,
-                    'Position',[0.55 0.25 0.16 0.05]);  %#ok               
+                    'Position',[0.55 0.25 0.16 0.05]);                
 button_iir = uicontrol('Parent', hfig,'Style','pushbutton',...
                     'Units','normalized',...
                     'Position',[0.4 0.05 0.2 0.1],...
                     'String','IIR Filter',...
-                    'Callback',{@tmseeg_IIR_func, A, step_num}); %#ok
+                    'Callback',{@tmseeg_IIR_func,A,step_num});
 IIR_ord_txt = uicontrol('Parent', hfig,'Style','text',...
                     'Units','normalized',...
                     'Position',[0.65 0.05 0.2 0.05],...
-                    'String','IIR Filter Order:'); %#ok
+                    'String','IIR Filter Order:');
 FIR_filt_ord_button = uicontrol('Parent', hfig,'Style','pushbutton',...
                     'Units','normalized',...
                     'Position',[0.85 0.05 0.05 0.05],...
                     'String',num2str(VARS.IIR_FILTER_ORDER),...
                     'tag','iir_filt_ord',...
-                    'Callback',{@IIR_filt_ord}); %#ok
-                            
+                    'Callback',{@IIR_filt_ord});
+                
+                 
 end
 
 
@@ -242,7 +235,6 @@ set(h,'String',get(hObject,'Value'))
 data = guidata(hObject);
 filt1_slider_low_fir= get(hObject,'Value');
 guidata(hObject,data);
-
 end
 
 function slider_callback2(hObject,eventdata)
@@ -254,11 +246,10 @@ set(h,'String',get(hObject,'Value'))
 data = guidata(hObject);
 filt1_slider_high_fir=get(hObject,'Value');
 guidata(hObject,data);
-
 end
 
 function FIR_filt_ord(varargin)
-
+% Function for 
 global VARS
 
 prompt = {'Enter FIR Filter order (50-200):'};
@@ -267,11 +258,10 @@ num_lines = 1;
 defaultans = {num2str(VARS.FIR_FILTER_ORDER)};
 answer = inputdlg(prompt,dlg_title,num_lines,defaultans);
 
-if isempty(answer)
+if (length(answer) == 0)
     disp('No changes made')
 else
-    order = str2double(answer{1});
-    
+    order = str2num(answer{1});
     if (order < 50) || (order > 200)
         error('Invalid Filter Order Entry')
     else
@@ -279,9 +269,9 @@ else
         h = findobj('Tag','fir_filt_ord');
         set(h,'String',num2str(order))
     end
-    
 end
     
+
 end
 
 function tmseeg_FIR_func(varargin)
@@ -293,14 +283,15 @@ global VARS
 A = varargin{3};
 step_num = varargin{4};
 %Data and variable loading
-global filt1_slider_low_fir filt1_slider_high_fir 
+global basepath filt1_slider_low_fir filt1_slider_high_fir existcolor
 
 [files, EEG] = tmseeg_load_step(step_num);
 
 %FIR filter
 EEG.data= eegfilt(EEG.data(:,:),EEG.srate,filt1_slider_low_fir,filt1_slider_high_fir,size(EEG.data,2),VARS.FIR_FILTER_ORDER,0);
 tmseeg_step_check(files, EEG, A, step_num)
-close;
+close
+
 
 end
 
@@ -313,7 +304,6 @@ set(h,'String',get(hObject,'Value'))
 data = guidata(hObject);
 filt1_slider_low_iir=get(hObject,'Value');
 guidata(hObject,data);
-
 end
 
 function slider_callback2_iir(hObject,eventdata)
@@ -325,7 +315,6 @@ set(h,'String',get(hObject,'Value'))
 data = guidata(hObject);
 filt1_slider_high_iir=get(hObject,'Value');
 guidata(hObject,data);
-
 end
 
 function callback_slider_notch_center(hObject,eventdata)
@@ -335,7 +324,6 @@ global notch_center
 h = findobj('Tag','text_notch_center');
 set(h,'String',get(hObject,'Value'))
 notch_center=get(hObject,'Value');
-
 end
 
 function callback_slider_notch_size(hObject,eventdata)
@@ -345,11 +333,9 @@ global notch_size
 h = findobj('Tag','text_notch_size');
 set(h,'String',get(hObject,'Value'))
 notch_size=get(hObject,'Value');
-
 end
 
 function IIR_filt_ord(varargin)
-
 global VARS
 
 prompt = {'Enter IIR Filter order (1-20):'};
@@ -358,11 +344,11 @@ num_lines = 1;
 defaultans = {num2str(VARS.IIR_FILTER_ORDER)};
 answer = inputdlg(prompt,dlg_title,num_lines,defaultans);
 
-if isempty(answer)
+
+if (length(answer) == 0)
     disp('No changes made')
 else
-    order = str2double(answer{1});
-    
+    order = str2num(answer{1});
     if (order < 1) || (order > 20)
         error('Invalid Filter Order Entry')
     else
@@ -370,9 +356,9 @@ else
         h = findobj('Tag','iir_filt_ord');
         set(h,'String',num2str(order))
     end
-    
 end
     
+
 end
 
 function tmseeg_IIR_func(varargin)
@@ -382,7 +368,7 @@ function tmseeg_IIR_func(varargin)
 %specified with notch sliders.
 
 %Data and variable loading
-global VARS
+global basepath existcolor VARS
 global filt1_slider_low_iir filt1_slider_high_iir
 global notch_center notch_size
 A        = varargin{3};
@@ -392,21 +378,20 @@ step_num = varargin{4};
 %Filter Design
 Fs=EEG.srate;
 ord = VARS.IIR_FILTER_ORDER;
-[z1, p1, k1]  = butter(ord,[filt1_slider_low_iir filt1_slider_high_iir]/(Fs/2),'bandpass');
-[xall1,yall2] = zp2sos(z1,p1,k1);
-[z2, p2, k2]  = butter(ord, [notch_center-(notch_size/2) notch_center+(notch_size/2)]/(Fs/2), 'stop'); % 10th order filter
-[xs1,xs2]     = zp2sos(z2,p2,k2); % Convert to 2nd order sections form
+[z1 p1 k1]      = butter(ord,[filt1_slider_low_iir filt1_slider_high_iir]/(Fs/2),'bandpass');
+[xall1,yall2]   = zp2sos(z1,p1,k1);
+[z2 p2 k2]      = butter(ord, [notch_center-(notch_size/2) notch_center+(notch_size/2)]/(Fs/2), 'stop'); % 10th order filter
+[xs1,xs2]       = zp2sos(z2,p2,k2); % Convert to 2nd order sections form
 
 %Apply Filter
 for ch=1:size(EEG.data,1)
-	tempA=filtfilt(xall1,yall2,reshape(double(EEG.data(ch,:)),size(EEG.data,2),size(EEG.data,3))); 
+	tempA=filtfilt(xall1,yall2,double(EEG.data(ch,:)));
 	tempB=filtfilt(xs1,xs2,double(tempA)); % apply notch filter
-	EEG.data(ch,:,:)= double(tempB);
+	EEG.data(ch,:)= double(tempB);
 end
+tmseeg_step_check(files, EEG, A, step_num)
 
-tmseeg_step_check(files, EEG, A, step_num);
-close;
-
+close
 end
 
 

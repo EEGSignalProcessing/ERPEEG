@@ -1,7 +1,7 @@
 % Author: Matthew Frehlich, Ye Mei, Luis Garcia Dominguez,Faranak Farzan
 % 2016
 
-% tmseeg_plot_channel() - Displays all trials within a selected channel for
+% tmseeg_plot_channel2() - Displays all trials within a selected channel for
 % deletion of bad trials or deletion of the full trial.  Allows scrolling
 % between channels, and offers visualization of channel data as a stacked
 % or spread display.
@@ -34,7 +34,7 @@
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
 
-function tmseeg_plot_channel(S)
+function tmseeg_plot_channel2(S)
 %plot_channel_new - creates initial GUI and initializes labels based on
 %status of input data.
 
@@ -339,7 +339,7 @@ else
             set(lines(badtrial),'visible','off');
         end
     end
-    ylim([VARS.PLT_CHN_YMIN VARS.PLT_CHN_YMAX]);
+    ylim([VARS.PLT_CHN_YMIN_2 VARS.PLT_CHN_YMAX_2]);
     xlim([floor(min(S.EEG.times)) ceil(max(S.EEG.times))]);
     hold off
 end
