@@ -368,8 +368,13 @@ S        = varargin{3};
 S        = guidata(S.fh);
 A        = varargin{4};
 [files, EEG] = tmseeg_load_step(S.step_num);
-EEG.nbchan_o = EEG.nbchan;
-EEG.trials_o = EEG.trials;
+
+if ~isfield(EEG,'nbchan_o')
+    EEG.nbchan_o = EEG.nbchan;
+end
+if ~isfield(EEG,'trials_o')
+    EEG.trials_o = EEG.trials;
+end
 
 try
     
