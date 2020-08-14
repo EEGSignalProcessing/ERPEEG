@@ -20,7 +20,7 @@
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
 
-function [] = tmseeg_ica2_remove(S, step_num)
+function [] = erpeeg_ica2_remove(S, step_num)
 
 %Check if previous steps were done
 if tmseeg_previous_step(step_num) 
@@ -43,6 +43,6 @@ else
     comptype = zeros(1,size(EEG.icawinv,2));
 end
  
-tmseeg_multiples_topos(EEG,name,S,step_num);
+erpeeg_multiples_topos(EEG,name,S,step_num);
 
 end
