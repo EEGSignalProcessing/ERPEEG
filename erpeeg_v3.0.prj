@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="3721423399" file="C:\Users\bjmsc\Documents\MATLAB\Toolboxes\erpeeg_v30\erpeeg_v3.0.prj" location="C:\Users\bjmsc\Documents\MATLAB\Toolboxes\erpeeg_v30" name="erpeeg_v3.0" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="426608284" file="C:\Users\bjmsc\Documents\MATLAB\Toolboxes\erpeeg_v30\erpeeg_v3.0.prj" location="C:\Users\bjmsc\Documents\MATLAB\Toolboxes\erpeeg_v30" name="erpeeg_v3.0" target="target.mlapps" target-name="Package App">
     <param.appname>erpeeg_v3.0</param.appname>
     <param.authnamewatermark />
     <param.email />

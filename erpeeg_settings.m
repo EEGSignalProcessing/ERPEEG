@@ -248,20 +248,24 @@ end
 
 function show_callback(varargin)
 % Settings call for View Data button
-global VARS
-
+global VARS xshowmin xshowmax
 % Set up pop-up display
-prompt = {'View Data y limit'};
+prompt = {'View Data x min',...
+          'View Data x max',...
+          'View Data y limit'};
 dlg_title = 'View Data Settings';
 num_lines = 1;
-defaultans = {num2str(VARS.YSHOWLIMIT)};
+defaultans = {num2str(xshowmin),...
+              num2str(xshowmax),...
+              num2str(VARS.YSHOWLIMIT)};
 answer = inputdlg(prompt,dlg_title,num_lines,defaultans);
 
-if isempty(answer) %Cancel Button
-disp('No changes made')
+if isempty(answer)
+    disp('No changes made')
 else
-    VARS.YSHOWLIMIT = str2double(answer{1});
-
+    xshowmin = str2double(answer{1});
+    xshowmax = str2double(answer{2});
+    VARS.YSHOWLIMIT = str2double(answer{3});
 end
 
 end
